@@ -18,6 +18,8 @@ app.use(express.json());
 // listen(port, function)
 //app.listen(PORT, () => {console.log(`Server has started on: ${PORT}`)});
 
+
+// running "npm init -y" is needed to vreate package.json
 // all that is technically needed to start a server, to run server:
 //   1. node server.js
 //      - the file will run indefinitely 
