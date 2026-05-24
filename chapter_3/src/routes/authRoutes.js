@@ -16,7 +16,15 @@ router.post('/register', (req, res) => {
 
     // save new user and hashed password to db
     try {
-        const insertUser = db.prepare(``);
+        // the user db columns as id is automatically asigned
+        // prepare a sql query to insrt the data
+        //specify the columns and the values, leaving values blank
+        // then run the commands, with real values to add to the db
+        const insertUser = db.prepare(`
+            INSERT INTO users (username, password)
+            VALUES (?,?)
+            `);
+            const result = insertUser.run(username, hashedPassword);
     } catch (err) {
         console.log(err.message);
         res.sendStatus(503);
