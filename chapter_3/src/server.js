@@ -40,6 +40,7 @@ app.get('/', (req, res) => {
 // routes
 // for any path that has /auth, use the authRoutes file
 app.use('/auth', authRoutes);
+app.use('/todos', todoRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server has started on port: ${PORT}`);
