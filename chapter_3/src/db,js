@@ -1,0 +1,35 @@
+
+import { DatabaseSync } from 'node:sqlite';
+
+// pass in a string for the location of the DB
+// we can have an in memory database by parsing: :memory:
+const db = new DatabaseSync(':memory:');
+ 
+
+// set up db when we boot up the application
+// execute SQL statements from strings;
+// we are going to have two sheets, one for users and one for todo's
+// and associate each todo with a user
+// exec(command) - takes an sql command and enacts it upon the db
+db.exec(//we start by defining out table,
+    // in the perenthesis, we define the columns and their data type
+    `
+    CREATE TABLE users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE,
+        password TEXT
+    )
+`);// autoincrement automatically asigns an id number that increments
+
+// second table
+db.exec(`
+    CREATE TABLE todos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        task TEXT,
+        completed BOOLEAN DEFAULT 0,
+        FOREIGN KEY(user_id) REFERENCES users(id)
+    )
+    `);
+
+export default db;
